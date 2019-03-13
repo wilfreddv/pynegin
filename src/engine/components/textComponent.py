@@ -1,8 +1,9 @@
 from .component import Component
+from ..constants.colors import COLORS
 from pygame.font import Font, SysFont
 
 class TextComponent(Component):
-    def __init__(self, container, text="", fontType="", x=0, y=0, textSize=0, color=(255,255,255)):
+    def __init__(self, container, text="", fontType="", x=0, y=0, textSize=0, color=COLORS.WHITE):
         self.text = text
         self.textSize = textSize
         self.color = color
@@ -25,7 +26,7 @@ class TextComponent(Component):
         self.surface = self.font.render(self.text, True, self.color)
 
     def select(self):
-        self.setColor((150,120,120))
+        self.setColor(COLORS.GREY)
 
     def unSelect(self):
-        self.setColor((0,0,0))
+        self.setColor(COLORS.BLACK)
