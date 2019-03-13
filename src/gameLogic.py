@@ -1,6 +1,5 @@
-from engine import textComponent, menuComponent
+from engine.components import textComponent, menuComponent
 import pygame
-
 
 class GameLogic:
     def __init__(self, window):
