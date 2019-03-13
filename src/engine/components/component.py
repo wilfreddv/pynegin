@@ -2,7 +2,7 @@ class Component:
     """Base class for objects that can be rendered to screen
     """
 
-    def __init__(self, container, x, y, size, isVisible=True, surface=None):
+    def __init__(self, container, x, y, size, isVisible=True, surface=None, border=None):
         self.container = container
         self.isVisible = isVisible
         self.surface = surface
