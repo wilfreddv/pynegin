@@ -15,8 +15,14 @@ class TextComponent(Component):
         color = [a if a < 255 else 255 for a in color]
         color = [a if a > 0 else 0 for a in color]
         self.color = color
-        self.surface = self.font.render(self.text, True, self.color)
+        self.update()
 
+    def setText(self, text):
+        self.text = text
+        self.update()
+
+    def update(self):
+        self.surface = self.font.render(self.text, True, self.color)
 
     def select(self):
         self.setColor((150,120,120))
