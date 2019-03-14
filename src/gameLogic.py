@@ -8,10 +8,15 @@ class GameLogic:
 
         self.menu = menuComponent.MenuComponent(window, size=(500, window.getHeight()), backgroundColor=COLORS.BLUE)
         myText = textComponent.TextComponent(self.menu, text="Hello World!", textSize=50, color=COLORS.BLACK)
-        myText2 = textComponent.TextComponent(self.menu, text="FooBar", y=50, textSize=50, color=COLORS.BLACK)
+        myText2 = textComponent.TextComponent(self.menu, text="FooBar", y=40, textSize=50, color=COLORS.BLACK)
+        myText3 = textComponent.TextComponent(self.menu, text="BazQux", y=80, textSize=50, color=COLORS.BLACK)
         myText.centerHorizontal()
         myText2.centerHorizontal()
-        self.menu.addChildren(myText, myText2)
+        myText3.centerHorizontal()
+        myText.activate = lambda: print("1")
+        myText2.activate = lambda: print("2")
+        myText3.activate = lambda: print("3")
+        self.menu.addChildren(myText, myText2, myText3)
         self.menu.K_NEXT = pygame.K_s
         self.menu.K_PREV = pygame.K_w
         self.menu.centerHorizontal()
@@ -20,11 +25,8 @@ class GameLogic:
         self.window.update()
 
     def input(self):
-        self.menu.updateSelected(self.window)
-
-        if self.window.isKeyDown(pygame.K_RETURN):
-            self.menu.activateItem()
-
+        self.menu.handleSelection(self.window)
+        self.menu.handleActivation(self.window)
 
     def render(self):
         self.menu.show(self.window.display)

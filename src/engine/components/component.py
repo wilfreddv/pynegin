@@ -62,8 +62,8 @@ class Component:
 
     def isHovered(self, window):
         mX, mY = window.getMousePos()
-        x = self.getXPos()
-        y = self.getYPos()
+        x = self.getXPos() + self.container.getXPos()
+        y = self.getYPos() + self.container.getYPos()
         return x < mX < x + self.getWidth() and y < mY < y + self.getHeight()
 
     def select(self):

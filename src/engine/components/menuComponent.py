@@ -9,7 +9,7 @@ class MenuComponent(Component):
         self.surface = pygame.Surface(self.size)
         self.backgroundColor = backgroundColor
         self.children = []
-        self.selected = 0
+        self.selected = -1
         self.K_NEXT, self.K_PREV = None, None # Keys for selecting next
         super().__init__(container, x, y, self.size, surface=self.surface)
 
@@ -32,15 +32,25 @@ class MenuComponent(Component):
             surf.blit(self.surface, self.rect)
 
 
-    def updateSelected(self, window):
-        if None in (self.K_NEXT, self.K_PREV):
-            raise ValueError("MenuComponent.K_NEXT or MenuComponent.K_PREV not set.")
+    def handleSelection(self, window):
+        if self.isHovered(window):
+            for i, child in enumerate(self.children):
+                if child.isHovered(window):
+                    self.children[self.selected].unSelect()
+                    self.selected = i
+                    self.children[self.selected].select()
 
-        if window.isKeyDown(self.K_NEXT):
-            self.selectNext()
+        if not None in (self.K_NEXT, self.K_PREV):
+            if window.isKeyDown(self.K_NEXT):
+                self.selectNext()
 
-        if window.isKeyDown(self.K_PREV):
-            self.selectPrevious()
+            if window.isKeyDown(self.K_PREV):
+                self.selectPrevious()
+
+
+    def handleActivation(self, window):
+        if window.isKeyDown(pygame.K_RETURN) or ( window.isMouseButtonPressed(0) and self.children[self.selected].isHovered(window) ):
+            self.children[self.selected].activate()
 
 
     def selectNext(self):

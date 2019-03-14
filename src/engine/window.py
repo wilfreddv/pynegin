@@ -58,7 +58,7 @@ class Window(Container):
 
     def getEvents(self):
         return self.events
-
+        
 
     def render(self):
         """Show all the blitted elements and immediately clear
