@@ -1,9 +1,11 @@
 import pygame
 from pygame.locals import *
 from .container import Container
+from operator import ior
+from functools import reduce
 
 class Window(Container):
-    def __init__(self, size, title, backgroundColor=(0,0,0)):
+    def __init__(self, size, title, backgroundColor=(0,0,0), resizable=False, fullscreen=False):
         super().__init__(0, 0, *size)
         pygame.init()
         pygame.font.init()
@@ -13,9 +15,16 @@ class Window(Container):
         self.events = []
         self._shouldStop = False
 
+        flags = []
+        if resizable:
+            flags.append(RESIZABLE)
+        if fullscreen:
+            flags.append(FULLSCREEN)
+        self.flags = reduce(ior, flags)
+
 
     def create(self):
-        self.display = pygame.display.set_mode(self.size)
+        self.display = pygame.display.set_mode(self.size, self.flags)
 
 
     def update(self):
