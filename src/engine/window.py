@@ -20,7 +20,7 @@ class Window(Container):
             flags.append(RESIZABLE)
         if fullscreen:
             flags.append(FULLSCREEN)
-        self.flags = reduce(ior, flags)
+        self.flags = reduce(ior, flags) if flags else 0
 
 
     def create(self):
