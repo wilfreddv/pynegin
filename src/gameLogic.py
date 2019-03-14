@@ -2,24 +2,28 @@ from engine.components import textComponent, menuComponent
 from engine.constants.colors import COLORS
 import pygame
 
+
+class MainMenu(menuComponent.MenuComponent):
+    def __init__(self, *args, onQuit=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.addChild(textComponent.TextComponent(self, text="Hello World!", textSize=50, color=COLORS.BLACK, onActivate=lambda: print("Hello")))
+        self.addChild(textComponent.TextComponent(self, text="FooBar", y=40, textSize=50, color=COLORS.BLACK, onActivate=lambda: print("FooBar")))
+        self.addChild(textComponent.TextComponent(self, text="QUIT", y=120, textSize=50, color=COLORS.BLACK, onActivate=onQuit))
+
+        for child in self.children:
+            child.centerHorizontal()
+
+        self.K_NEXT = pygame.K_s
+        self.K_PREV = pygame.K_w
+        self.centerHorizontal()
+
+
 class GameLogic:
     def __init__(self, window):
         self.window = window
 
-        self.menu = menuComponent.MenuComponent(window, size=(500, window.getHeight()), backgroundColor=COLORS.BLUE)
-        myText = textComponent.TextComponent(self.menu, text="Hello World!", textSize=50, color=COLORS.BLACK)
-        myText2 = textComponent.TextComponent(self.menu, text="FooBar", y=40, textSize=50, color=COLORS.BLACK)
-        myText3 = textComponent.TextComponent(self.menu, text="QUIT", y=120, textSize=50, color=COLORS.BLACK)
-        myText.centerHorizontal()
-        myText2.centerHorizontal()
-        myText3.centerHorizontal()
-        myText.activate = lambda: print("1")
-        myText2.activate = lambda: print("2")
-        myText3.activate = self.quit
-        self.menu.addChildren(myText, myText2, myText3)
-        self.menu.K_NEXT = pygame.K_s
-        self.menu.K_PREV = pygame.K_w
-        self.menu.centerHorizontal()
+        self.menu = MainMenu(window, size=window.size, backgroundColor=COLORS.BLUE, onQuit=self.quit)
 
 
     def input(self):
@@ -37,4 +41,5 @@ class GameLogic:
 
     def quit(self):
         # Gently shut down
+        print("Shutting down")
         self.window.quit()

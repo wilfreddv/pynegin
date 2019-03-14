@@ -2,12 +2,14 @@ class Component:
     """Base class for objects that can be rendered to screen
     """
 
-    def __init__(self, container, x=0, y=0, size=(0,0), isVisible=True, surface=None, border=None):
+    def __init__(self, container, x=0, y=0, size=(0,0), isVisible=True, surface=None, border=None, onActivate=None):
         self.container = container
         self.isVisible = isVisible
         self.surface = surface
         self.rect = self.surface.get_rect()
         self.rect.center = (x + size[0]/2, y + size[1]/2)
+        self.onActivate = onActivate
+
 
     def getPosition(self):
         return (self.rect.x, self.rect.y)
@@ -73,4 +75,5 @@ class Component:
         pass
 
     def activate(self):
-        pass
+        if self.onActivate:
+            self.onActivate()

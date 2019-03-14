@@ -3,14 +3,14 @@ from ..constants.colors import COLORS
 from pygame.font import Font, SysFont
 
 class TextComponent(Component):
-    def __init__(self, container, text="", fontType="", x=0, y=0, textSize=0, color=COLORS.WHITE):
+    def __init__(self, container, text="", fontType="", x=0, y=0, textSize=0, color=COLORS.WHITE, onActivate=None):
         self.text = text
         self.textSize = textSize
         self.color = color
         self.font = SysFont(fontType, self.textSize)
         self.size = self.font.size(self.text)
         self.surface = self.font.render(self.text, True, self.color)
-        super().__init__(container, x, y, self.size, surface=self.surface)
+        super().__init__(container, x, y, self.size, surface=self.surface, onActivate=onActivate)
 
     def setColor(self, color):
         color = [a if a < 255 else 255 for a in color]
