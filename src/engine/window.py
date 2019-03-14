@@ -11,6 +11,7 @@ class Window(Container):
         self.size = size
         self.backgroundColor = backgroundColor
         self.events = []
+        self._shouldStop = False
 
 
     def create(self):
@@ -23,7 +24,9 @@ class Window(Container):
 
     def shouldStop(self):
         types = [e.type for e in self.events]
-        return QUIT in types
+        if self._shouldStop or QUIT in types:
+            pygame.display.quit()
+            return True
 
 
     def isKeyPressed(self, key):
@@ -58,7 +61,7 @@ class Window(Container):
 
     def getEvents(self):
         return self.events
-        
+
 
     def render(self):
         """Show all the blitted elements and immediately clear
@@ -66,3 +69,6 @@ class Window(Container):
         """
         pygame.display.update()
         self.display.fill(self.backgroundColor)
+
+    def quit(self):
+        self._shouldStop = True
