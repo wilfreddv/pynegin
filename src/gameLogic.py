@@ -1,4 +1,4 @@
-from engine.components import textComponent, menuComponent
+from engine.components import textComponent, menuComponent, imageComponent
 from engine.constants.colors import COLORS
 import pygame
 
@@ -24,6 +24,8 @@ class GameLogic:
         self.window = window
 
         self.menu = MainMenu(window, size=window.size, backgroundColor=COLORS.BLUE, onQuit=self.quit)
+        self.img  = imageComponent.ImageComponent(window, "python.png")
+        self.img.fitToScreen(window)
 
 
     def input(self):
@@ -36,8 +38,10 @@ class GameLogic:
 
 
     def render(self):
-        self.menu.show(self.window.display)
+        #self.menu.show(self.window.display)
+        self.img.show(self.window.display)
         self.window.render()
+
 
     def quit(self):
         # Gently shut down
