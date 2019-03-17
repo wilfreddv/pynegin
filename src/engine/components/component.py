@@ -77,3 +77,9 @@ class Component:
     def activate(self):
         if self.onActivate:
             self.onActivate()
+
+    def fadeIn(self, time):
+        pass
+
+    def fadeOut(self, time):
+        pass
