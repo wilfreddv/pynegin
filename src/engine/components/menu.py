@@ -1,7 +1,7 @@
 from .component import Component
 import pygame
 
-class MenuComponent(Component):
+class Menu(Component):
     def __init__(self, container, x=0, y=0, size=None, isVisible=True, surface=None, backgroundColor=(255,255,255), background=None):
         self.size = size if size else (container.width, container.height)
         self.container = container

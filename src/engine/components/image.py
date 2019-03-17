@@ -2,7 +2,7 @@ from .component import Component
 import pygame
 import pathlib
 
-class ImageComponent(Component):
+class Image(Component):
     def __init__(self, container, source, x=0, y=0, size=(0,0), isVisible=True,
                  surface=None, border=None, onActivate=None, basePath=None):
 

@@ -2,7 +2,7 @@ from .component import Component
 from ..constants.colors import COLORS
 from pygame.font import Font, SysFont
 
-class TextComponent(Component):
+class Text(Component):
     def __init__(self, container, text="", fontType="", x=0, y=0, textSize=0, color=COLORS.WHITE, onActivate=None):
         self.text = text
         self.textSize = textSize
