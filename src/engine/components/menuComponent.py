@@ -2,12 +2,13 @@ from .component import Component
 import pygame
 
 class MenuComponent(Component):
-    def __init__(self, container, x=0, y=0, size=None, isVisible=True, surface=None, backgroundColor=(255,255,255)):
+    def __init__(self, container, x=0, y=0, size=None, isVisible=True, surface=None, backgroundColor=(255,255,255), background=None):
         self.size = size if size else (container.width, container.height)
         self.container = container
         self.isVisible = isVisible
         self.surface = pygame.Surface(self.size)
         self.backgroundColor = backgroundColor
+        self.background = background
         self.children = []
         self.selected = -1
         self.K_NEXT, self.K_PREV = None, None # Keys for selecting next
@@ -26,6 +27,7 @@ class MenuComponent(Component):
     def show(self, surf):
         if self.isVisible:
             self.surface.fill(self.backgroundColor)
+            if self.background: self.surface.blit(self.background.surface, (0,0))
             for child in self.children:
                 child.show(self.surface)
 
