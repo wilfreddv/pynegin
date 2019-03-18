@@ -45,7 +45,7 @@ class GameLogic:
 
     def render(self):
         self.context.show(self.window.display)
-        self.window.render()
+        self.window.render(self.context)
 
     def onImg(self):
         self.context = self.img

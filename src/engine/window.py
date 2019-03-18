@@ -72,11 +72,11 @@ class Window(Container):
         return self.events
 
 
-    def render(self):
+    def render(self, ctx):
         """Show all the blitted elements and immediately clear
         the display so old elements won't stay
         """
-        pygame.display.update()
+        pygame.display.update(ctx.rect)
         self.display.fill(self.backgroundColor)
 
     def quit(self):
