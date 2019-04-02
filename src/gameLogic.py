@@ -24,7 +24,7 @@ class GameLogic:
         self.window = window
 
         self.img  = image.Image(window, "python.png")
-        self.img.fitToScreen(window)
+        self.img.resize((10,10))
         self.menu = MainMenu(window, size=window.size, backgroundColor=COLORS.BLUE, onQuit=self.quit, onImg=self.onImg)
 
         self.context = self.menu
@@ -34,6 +34,10 @@ class GameLogic:
         if self.context == self.img:
             if self.window.isKeyPressed(pygame.K_ESCAPE):
                 self.context = self.menu
+            elif self.window.isKeyPressed(pygame.K_s):
+                self.img.fadeOut(100)
+            elif self.window.isKeyPressed(pygame.K_d):
+                self.img.fitToScreen(self.window)
         else:
             self.menu.handleSelection(self.window)
             self.menu.handleActivation(self.window)

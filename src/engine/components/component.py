@@ -1,3 +1,5 @@
+import time
+
 class Component:
     """Base class for objects that can be rendered to screen
     """
@@ -9,13 +11,20 @@ class Component:
         self.rect = self.surface.get_rect()
         self.rect.center = (x + size[0]/2, y + size[1]/2)
         self.onActivate = onActivate
+        self.fade = None
 
+
+    def _update_rect(self):
+        self.rect = self.surface.get_rect()
+        x, y = self.getPosition()
+        w, h = self.getSize()
+        self.rect.center = (x + w/2, y + h/2)
 
     def getPosition(self):
         return (self.rect.x, self.rect.y)
 
     def getSize(self):
-        return (self.width, self.height)
+        return (self.rect.width, self.rect.height)
 
     def center(self):
         self.centerHorizontal()
@@ -47,6 +56,9 @@ class Component:
         self.isVisible = isVisible
 
     def show(self, surf):
+        #if self.fade:
+        #    self.doFade()
+        self.surface.set_alpha(self.surface.get_alpha() + 1)
         if self.isVisible:
             surf.blit(self.surface, self.rect)
 
@@ -78,8 +90,31 @@ class Component:
         if self.onActivate:
             self.onActivate()
 
-    def fadeIn(self, time):
-        pass
+    def getAlpha(self):
+        return self.surface.get_alpha()
 
-    def fadeOut(self, time):
-        pass
+    def setAlpha(self, a):
+        self.surface.set_alpha(a)
+
+    def doFade(self):
+        time.sleep(0.1)
+        now = time.time() * 1000
+        if self.fade == "in":
+            self.setAlpha(self.getAlpha() + 1)
+        elif self.fade == "out":
+            self.setAlpha(self.getAlpha() - 1)
+
+        self.fadeTimeLeft -= now - self.prev
+        self.prev = now
+        if self.fadeTimeLeft <= 0:
+            self.fade = False
+
+    def fadeIn(self, fadeTime):
+        self.prev = time.time() * 1000
+        self.fade = "out"
+        self.fadeTimeLeft = fadeTime
+
+    def fadeOut(self, fadeTime):
+        self.prev = time.time() * 1000
+        self.fade = "out"
+        self.fadeTimeLeft = fadeTime
