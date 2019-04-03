@@ -81,10 +81,10 @@ class Component:
         return x < mX < x + self.getWidth() and y < mY < y + self.getHeight()
 
     def select(self):
-        pass
+        raise NotImplementedError(f"Method `select` not implemented for class {self.__class__}")
 
     def unSelect(self):
-        pass
+        raise NotImplementedError(f"Method `unSelect` not implemented for class {self.__class__}")
 
     def activate(self):
         if self.onActivate:
