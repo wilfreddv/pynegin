@@ -1,12 +1,5 @@
 This is where I put my ideas to implement I come up with on the go:
 
-Contexts:
-    Has position and size
-    will be delegated to from gamelogic
-    in gamelogic you can have multiple contexts and switch between them
-    this way a menu can easily pop up, and use less rendering resources (instead
-    of screen.update use screen.flip)
-
 Animations:
     class that has some image components and loops over them
     accepts 16x16/32x32/.. files with animation tiles things
