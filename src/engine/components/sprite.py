@@ -83,3 +83,6 @@ class Sprite(Component):
 
     def next(self):
         self.current = (self.current + 1) % len(self.sprites)
+
+    def select(self, s):
+        self.current = s % len(self.sprites)
