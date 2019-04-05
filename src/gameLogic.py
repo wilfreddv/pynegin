@@ -27,15 +27,15 @@ class GameLogic:
         self.img.resize((10,10))
         self.menu = MainMenu(window, size=window.size, backgroundColor=COLORS.BLUE, onQuit=self.quit, onImg=self.onImg)
 
-        self.sprite = sprite.Sprite(window, "test.png", size=(16,16), padding=1, per_row=2, amount=2)
+        self.sprite = sprite.Sprite(window, "test.png", size=(16,16), padding=1, per_row=2, amount=4)
         self.sprite.fitToScreen(window)
         self.sprite.center()
         self.context = self.sprite
 
 
     def input(self):
-        self.menu.handleSelection(self.window)
-        self.menu.handleActivation(self.window)
+        if self.window.isKeyDown(pygame.K_q):
+            self.sprite.next()
 
 
     def update(self):

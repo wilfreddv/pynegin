@@ -35,8 +35,8 @@ class Sprite(Component):
         rows = round(amount / per_row)
         total_height = (rows + padding) * size[1]
         total_width = (per_row + padding) * size[0]
-        for row in range(padding, total_height-size[1], size[1]):
-            for sp in range(padding, total_width-size[0], size[0]):
+        for row in range(padding, total_height-size[1], padding+size[1]):
+            for sp in range(padding, total_width-size[0], padding+size[0]):
                     sprite = spriteMap.crop( (sp, row, sp+size[0], row+size[1]) )
                     self.sprites.append( Image(container, None, fromString=True, PIL_img=sprite) )
 
@@ -80,3 +80,6 @@ class Sprite(Component):
     def resize(self, size):
         for sprite in self.sprites:
             sprite.resize(size)
+
+    def next(self):
+        self.current = (self.current + 1) % len(self.sprites)
