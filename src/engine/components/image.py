@@ -4,14 +4,18 @@ import pathlib
 
 class Image(Component):
     def __init__(self, container, source, x=0, y=0, size=(0,0), isVisible=True,
-                 surface=None, border=None, onActivate=None, basePath=None):
+                 surface=None, border=None, onActivate=None, basePath=None, fromString=False, PIL_img=None):
 
-        if not basePath:
-            path = pathlib.Path(__file__).parent.parent.parent.absolute()
-            path = path.joinpath("assets/")
-            path = str(path.joinpath(source))
+        if fromString:
+            surface = pygame.image.fromstring(PIL_img.tobytes(), PIL_img.size, PIL_img.mode)
+        else:
+            if not basePath:
+                path = pathlib.Path(__file__).parent.parent.parent.absolute()
+                path = path.joinpath("assets/")
+                path = str(path.joinpath(source))
 
-        surface = pygame.image.load(path)
+            surface = pygame.image.load(path)
+
         super().__init__(container, x=x, y=y, size=size, isVisible=isVisible, surface=surface, border=border, onActivate=onActivate)
 
 

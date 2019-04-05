@@ -1,4 +1,4 @@
-from engine.components import text, menu, image
+from engine.components import text, menu, image, sprite
 from engine.constants.colors import COLORS
 import pygame
 
@@ -27,20 +27,15 @@ class GameLogic:
         self.img.resize((10,10))
         self.menu = MainMenu(window, size=window.size, backgroundColor=COLORS.BLUE, onQuit=self.quit, onImg=self.onImg)
 
-        self.context = self.menu
+        self.sprite = sprite.Sprite(window, "test.png", size=(16,16), padding=1, per_row=2, amount=2)
+        self.sprite.fitToScreen(window)
+        self.sprite.center()
+        self.context = self.sprite
 
 
     def input(self):
-        if self.context == self.img:
-            if self.window.isKeyPressed(pygame.K_ESCAPE):
-                self.context = self.menu
-            elif self.window.isKeyPressed(pygame.K_s):
-                self.img.fadeOut(100)
-            elif self.window.isKeyPressed(pygame.K_d):
-                self.img.fitToScreen(self.window)
-        else:
-            self.menu.handleSelection(self.window)
-            self.menu.handleActivation(self.window)
+        self.menu.handleSelection(self.window)
+        self.menu.handleActivation(self.window)
 
 
     def update(self):

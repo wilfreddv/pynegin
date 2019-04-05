@@ -1,7 +1,9 @@
 from PIL import Image as PIL_Image
+from .image import Image
+from .component import Component
 import pathlib
 
-class Sprite:
+class Sprite(Component):
     def __init__(self, container, source, size=(32, 32), padding=0, per_row=1, amount=1, animated=False, animation_speed=1.0):
         """container -> Component: parent Component of Sprite
            source -> str: path to the map (base=assets/)
@@ -21,20 +23,60 @@ class Sprite:
         self.amount = amount
         self.animated = animated
         self.animation_speed = animation_speed
+        self.current = 0
 
         path = pathlib.Path(__file__).parent.parent.parent.absolute()
         ass_path = path.joinpath("assets/")
         path = str(ass_path.joinpath(source))
 
         spriteMap = PIL_Image.open(path)
-        sprites = []
+        self.sprites = []
 
         rows = round(amount / per_row)
         total_height = (rows + padding) * size[1]
         total_width = (per_row + padding) * size[0]
         for row in range(padding, total_height-size[1], size[1]):
             for sp in range(padding, total_width-size[0], size[0]):
-                    sprites.append(spriteMap.crop( (sp, row, sp+size[0], row+size[1]) ))
+                    sprite = spriteMap.crop( (sp, row, sp+size[0], row+size[1]) )
+                    self.sprites.append( Image(container, None, fromString=True, PIL_img=sprite) )
 
-        for idx, sprite in enumerate(sprites):
-            sprite.save(ass_path.joinpath(f"{idx}.png"))
+        self.surface = self.sprites[0].surface
+        self.rect = self.sprites[0].rect
+
+        super().__init__(container, size=size, surface=self.surface)
+
+
+    def show(self, surf):
+        self._update()
+        self.sprites[self.current].show(surf)
+
+    def _update(self):
+        self.rect = self.sprites[self.current].rect
+
+    def center(self):
+        self.centerHorizontal()
+        self.centerVertical()
+
+    def centerHorizontal(self):
+        for sprite in self.sprites:
+            sprite.centerHorizontal()
+
+    def centerVertical(self):
+        for sprite in self.sprites:
+            sprite.centerVertical()
+
+    def moveHorizontal(self, distance):
+        for sprite in self.sprites:
+            sprite.moveHorizontal(distance)
+
+    def moveVertical(self, distance):
+        for sprite in self.sprites:
+            sprite.moveVertical(distance)
+
+    def fitToScreen(self, window):
+        for sprite in self.sprites:
+            sprite.fitToScreen(window)
+
+    def resize(self, size):
+        for sprite in self.sprites:
+            sprite.resize(size)
