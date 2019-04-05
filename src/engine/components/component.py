@@ -56,9 +56,6 @@ class Component:
         self.isVisible = isVisible
 
     def show(self, surf):
-        #if self.fade:
-        #    self.doFade()
-        self.surface.set_alpha(self.surface.get_alpha() + 1)
         if self.isVisible:
             surf.blit(self.surface, self.rect)
 
@@ -89,32 +86,3 @@ class Component:
     def activate(self):
         if self.onActivate:
             self.onActivate()
-
-    def getAlpha(self):
-        return self.surface.get_alpha()
-
-    def setAlpha(self, a):
-        self.surface.set_alpha(a)
-
-    def doFade(self):
-        time.sleep(0.1)
-        now = time.time() * 1000
-        if self.fade == "in":
-            self.setAlpha(self.getAlpha() + 1)
-        elif self.fade == "out":
-            self.setAlpha(self.getAlpha() - 1)
-
-        self.fadeTimeLeft -= now - self.prev
-        self.prev = now
-        if self.fadeTimeLeft <= 0:
-            self.fade = False
-
-    def fadeIn(self, fadeTime):
-        self.prev = time.time() * 1000
-        self.fade = "out"
-        self.fadeTimeLeft = fadeTime
-
-    def fadeOut(self, fadeTime):
-        self.prev = time.time() * 1000
-        self.fade = "out"
-        self.fadeTimeLeft = fadeTime
