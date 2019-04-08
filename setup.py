@@ -8,7 +8,7 @@ setup(
     author_email="_",
     packages=["pynegin"],
     install_requires=["pygame", "Pillow"],
-    url="http://wilfred-kun.github.io/pynegin",
+    url="http://wilfred-kun.github.io/pynegin.html",
     classifiers=[
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
@@ -16,6 +16,6 @@ setup(
     ],
     project_urls={
         "Documentation": "http://wilfred-kun.github.io/pynegin",
-        "Source": "https://github.com/wilfred-kun/pynegin"
+        "Source": "https://github.com/wilfred-kun/pynegin.html"
     }
 )
