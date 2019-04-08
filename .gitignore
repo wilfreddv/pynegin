@@ -1,2 +1,4 @@
 *__pycache__
 PyneVenv
+dist
+pynegin.egg-info
