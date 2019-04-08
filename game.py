@@ -1,6 +1,6 @@
-from src.components import text, menu, image, sprite
-from src.constants.colors import COLORS
-from src.gameLogic import GameLogic
+from pynegin.components import text, menu, image, sprite
+from pynegin.constants.colors import COLORS
+from pynegin.gameLogic import GameLogic
 import pygame
 
 

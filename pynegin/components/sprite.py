@@ -1,6 +1,7 @@
 from PIL import Image as PIL_Image
 from .image import Image
 from .component import Component
+from pynegin.conf import HOME
 import pathlib
 
 class Sprite(Component):
@@ -25,7 +26,7 @@ class Sprite(Component):
         self.animation_speed = animation_speed
         self.current = 0
 
-        path = pathlib.Path(__file__).parent.parent.absolute()
+        path = pathlib.Path(HOME)
         ass_path = path.joinpath("assets/")
         path = str(ass_path.joinpath(source))
 
