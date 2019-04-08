@@ -1,4 +1,5 @@
 from .component import Component
+from pynegin.conf import HOME
 import pygame
 import pathlib
 
@@ -10,7 +11,7 @@ class Image(Component):
             surface = pygame.image.fromstring(PIL_img.tobytes(), PIL_img.size, PIL_img.mode)
         else:
             if not basePath:
-                path = pathlib.Path(__file__).parent.parent.parent.absolute()
+                path = pathlib.Path(HOME)
                 path = path.joinpath("assets/")
                 path = str(path.joinpath(source))
 
