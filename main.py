@@ -1,5 +1,5 @@
 import pygame
-from engine import engine, window
+from src import engine, window
 from game import Game
 
 window = window.Window((800,600), "My game")

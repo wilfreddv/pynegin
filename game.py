@@ -1,6 +1,6 @@
-from engine.components import text, menu, image, sprite
-from engine.constants.colors import COLORS
-from gameLogic import GameLogic
+from src.components import text, menu, image, sprite
+from src.constants.colors import COLORS
+from src.gameLogic import GameLogic
 import pygame
 
 

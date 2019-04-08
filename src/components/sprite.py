@@ -25,7 +25,7 @@ class Sprite(Component):
         self.animation_speed = animation_speed
         self.current = 0
 
-        path = pathlib.Path(__file__).parent.parent.parent.absolute()
+        path = pathlib.Path(__file__).parent.parent.absolute()
         ass_path = path.joinpath("assets/")
         path = str(ass_path.joinpath(source))
 

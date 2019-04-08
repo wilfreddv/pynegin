@@ -1,5 +1,4 @@
 import pygame
-from gameLogic import GameLogic
 
 class Engine:
     def __init__(self, gameLogic, window, max_fps=30):
