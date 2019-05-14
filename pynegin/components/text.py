@@ -22,8 +22,12 @@ class Text(Component):
         self.text = text
         self.update()
 
+    def getText(self):
+        return self.text
+
     def update(self):
         self.surface = self.font.render(self.text, True, self.color)
+        self.rect = self.surface.get_rect()
 
     def select(self):
         self.setColor(COLORS.GREY)
