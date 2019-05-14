@@ -1,4 +1,3 @@
-import pygame
 import pynegin
 from game import Game
 
