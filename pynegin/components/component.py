@@ -86,3 +86,7 @@ class Component:
     def activate(self):
         if self.onActivate:
             self.onActivate()
+
+    def isTouching(self, obj):
+        # TODO
+        return False
