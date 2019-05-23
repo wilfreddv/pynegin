@@ -7,6 +7,9 @@ Animations:
 Fade for components:
     Make a component fade in/out: set alpha higher/lower over time
 
+Hitbox overlay:
+    Custom hitbox, right now it's a rectangle
+
 Make resizing possible:
     speaks for itself: resize should set isResized on the window so containers
     can update accordingly
