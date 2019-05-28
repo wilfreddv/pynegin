@@ -1,5 +1,8 @@
 This is where I put my ideas to implement I come up with on the go:
 
+Basic shapes:
+    Lines, rectangles, etc. Just regular 2D drawing stuff.
+
 Animations:
     class that has some image components and loops over them
     accepts 16x16/32x32/.. files with animation tiles things
