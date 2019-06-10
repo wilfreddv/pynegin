@@ -9,7 +9,6 @@ class GameLogic:
     def update(self):
         self.window.update()
 
-
     def render(self):
         self.context.show(self.window.display)
         self.window.render(self.context)
