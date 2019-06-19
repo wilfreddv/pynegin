@@ -39,7 +39,6 @@ class Lines(component.Component):
 class Game(GameLogic):
     def __init__(self, window):
 
-<<<<<<< HEAD
         self.textField = inputField.InputField(window, textSize=30, color=COLORS.WHITE)
         self.t = text.Text(window, text="Hello!", textSize=50, color=COLORS.WHITE)
         ctx = Lines(window)
@@ -51,30 +50,3 @@ class Game(GameLogic):
         #self.textField.updateInput(self.window.getPressedKeys())
 
         ...
-=======
-
-        self.img  = image.Image(window, "python.png")
-        self.img.resize((10,10))
-        self.menu = MainMenu(window, size=window.size, backgroundColor=COLORS.BLUE, onQuit=self.quit)
-
-        self.sprite = sprite.Sprite(window, "test2.png", size=(16,16), padding=1, per_row=2, amount=3)
-        self.sprite.resize((200,200))
-        self.sprite.center()
-
-        # self.textField = inputField.InputField(window, textSize=30, color=COLORS.WHITE)
-        # self.t = text.Text(window, text="Hello!", textSize=50, color=COLORS.WHITE)
-        super().__init__(window, self.sprite)
-
-
-    def input(self):
-        if self.window.isKeyPressed(pygame.K_d):
-            self.sprite.select(1)
-            self.sprite.moveHorizontal(5)
-        elif self.window.isKeyPressed(pygame.K_a):
-            self.sprite.select(2)
-            self.sprite.moveHorizontal(-5)
-        else:
-            self.sprite.select(0)
-        print(self.sprite.getPosition())
-        # self.textField.updateInput(self.window.getPressedKeys())
->>>>>>> 7f8f33d5f6b05c8f86374cb74f3ca1be94f317c2
