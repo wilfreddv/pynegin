@@ -48,7 +48,5 @@ class Line(Component):
         self._transpose((0,distance))
 
     def _transpose(self, diff=(0,0)):
-        print(self.start_pos, self.end_pos)
         self.start_pos = self.start_pos[0]+diff[0], self.start_pos[1]+diff[1]
         self.end_pos = self.end_pos[0]+diff[0], self.end_pos[1]+diff[1]
-        print(self.start_pos, self.end_pos)
