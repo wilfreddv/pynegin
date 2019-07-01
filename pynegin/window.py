@@ -7,7 +7,7 @@ from .conf import HOME
 import pathlib
 
 class Window(Container):
-    def __init__(self, size, title, backgroundColor=(0,0,0), resizable=False, fullscreen=False):
+    def __init__(self, size, title, backgroundColor=(0,0,0), resizable=False, fullscreen=False, customIconPath=None):
         super().__init__(0, 0, *size)
         pygame.init()
         pygame.font.init()
@@ -16,6 +16,7 @@ class Window(Container):
         self.backgroundColor = backgroundColor
         self.events = []
         self._shouldStop = False
+        self.customIconPath = customIconPath
 
         flags = []
         if resizable:
@@ -32,12 +33,15 @@ class Window(Container):
 
     def _set_icon(self):
         try:
-            path = pathlib.Path(HOME)
-            path = path.joinpath("assets/icon.png")
-            path = str(path)
+            if self.customIconPath:
+                path = self.customIconPath
+            else:
+                path = pathlib.Path(HOME)
+                path = path.joinpath("assets/icon.png")
+                path = str(path)
             icon = pygame.image.load(path)
             pygame.display.set_icon(icon)
-        except pygame.error:
+        except pygame.error as e:
             pass # No icon found, using default
 
 
