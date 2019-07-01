@@ -3,6 +3,8 @@ from pygame.locals import *
 from .container import Container
 from operator import ior
 from functools import reduce
+from .conf import HOME
+import pathlib
 
 class Window(Container):
     def __init__(self, size, title, backgroundColor=(0,0,0), resizable=False, fullscreen=False):
@@ -25,6 +27,18 @@ class Window(Container):
 
     def create(self):
         self.display = pygame.display.set_mode(self.size, self.flags)
+        self._set_icon()
+
+
+    def _set_icon(self):
+        try:
+            path = pathlib.Path(HOME)
+            path = path.joinpath("assets/icon.png")
+            path = str(path)
+            icon = pygame.image.load(path)
+            pygame.display.set_icon(icon)
+        except pygame.error:
+            pass # No icon found, using default
 
 
     def update(self):
