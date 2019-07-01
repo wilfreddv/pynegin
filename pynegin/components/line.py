@@ -4,14 +4,14 @@ from pygame.draw import line as drawline
 from pygame import Surface
 
 class Line(Component):
-    def __init__(self, container, start_pos, end_pos, width, color=COLORS.BLACK):
+    def __init__(self, container, start_pos, end_pos, width, color=COLORS.BLACK, isVisible=True):
         self.start_pos = start_pos
         self.end_pos = end_pos
         self.width = width
         self.color = color
         self.size = abs(start_pos[0]-end_pos[0])+width, abs(start_pos[1]-end_pos[1])+width
         self.surface = Surface(self.size)
-        super().__init__(container, x=start_pos[0], y=start_pos[1], size=self.size, surface=self.surface)
+        super().__init__(container, x=start_pos[0], y=start_pos[1], size=self.size, surface=self.surface, isVisible=isVisible)
 
     def show(self, surf):
         if self.isVisible:
