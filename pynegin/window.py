@@ -102,5 +102,6 @@ class Window(Container):
         pygame.display.update(ctx.rect)
         self.display.fill(self.backgroundColor)
 
+
     def quit(self):
         self._shouldStop = True
