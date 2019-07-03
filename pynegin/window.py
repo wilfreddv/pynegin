@@ -1,9 +1,13 @@
 import pygame
 from pygame.locals import *
 from .container import Container
+from operator import ior
+from functools import reduce
+from .conf import HOME
+import pathlib
 
 class Window(Container):
-    def __init__(self, size, title, backgroundColor=(0,0,0)):
+    def __init__(self, size, title, backgroundColor=(0,0,0), resizable=False, fullscreen=False, customIconPath=None):
         super().__init__(0, 0, *size)
         pygame.init()
         pygame.font.init()
@@ -11,10 +15,34 @@ class Window(Container):
         self.size = size
         self.backgroundColor = backgroundColor
         self.events = []
+        self._shouldStop = False
+        self.customIconPath = customIconPath
+
+        flags = []
+        if resizable:
+            flags.append(RESIZABLE)
+        if fullscreen:
+            flags.append(FULLSCREEN)
+        self.flags = reduce(ior, flags) if flags else 0
 
 
     def create(self):
-        self.display = pygame.display.set_mode(self.size)
+        self.display = pygame.display.set_mode(self.size, self.flags)
+        self._set_icon()
+
+
+    def _set_icon(self):
+        try:
+            if self.customIconPath:
+                path = self.customIconPath
+            else:
+                path = pathlib.Path(HOME)
+                path = path.joinpath("assets/icon.png")
+                path = str(path)
+            icon = pygame.image.load(path)
+            pygame.display.set_icon(icon)
+        except pygame.error as e:
+            pass # No icon found, using default
 
 
     def update(self):
@@ -23,7 +51,9 @@ class Window(Container):
 
     def shouldStop(self):
         types = [e.type for e in self.events]
-        return QUIT in types
+        if self._shouldStop or QUIT in types:
+            pygame.display.quit()
+            return True
 
 
     def isKeyPressed(self, key):
@@ -60,9 +90,18 @@ class Window(Container):
         return self.events
 
 
-    def render(self):
+    def getPressedKeys(self):
+        # Using events to maintain order of pressed keys
+        return [e.key for e in self.events if e.type == pygame.KEYDOWN]
+
+
+    def render(self, ctx):
         """Show all the blitted elements and immediately clear
         the display so old elements won't stay
         """
-        pygame.display.update()
+        pygame.display.update(ctx.rect)
         self.display.fill(self.backgroundColor)
+
+
+    def quit(self):
+        self._shouldStop = True
