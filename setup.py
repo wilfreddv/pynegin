@@ -13,7 +13,7 @@ PACKAGES = ['pynegin',
 
 setup(
     name="pynegin",
-    version="0.2",
+    version="0.3",
     description="Pure Python Game Engine On Top Of PyGame",
     long_description=long_desc,
     author="Wilfred",
