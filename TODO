@@ -16,3 +16,6 @@ Hitbox overlay:
 Make resizing possible:
     speaks for itself: resize should set isResized on the window so containers
     can update accordingly
+
+Sounds:
+    Sound support
