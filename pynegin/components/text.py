@@ -26,8 +26,10 @@ class Text(Component):
         return self.text
 
     def update(self):
+        center = self.rect.center
         self.surface = self.font.render(self.text, True, self.color)
         self.rect = self.surface.get_rect()
+        self.rect.center = center
 
     def select(self):
         self.setColor(COLORS.GREY)
